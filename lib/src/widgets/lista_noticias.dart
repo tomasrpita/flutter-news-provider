@@ -31,7 +31,10 @@ class _Noticia extends StatelessWidget {
         children: [
           _TarjetaTopBar(this.noticia, this.index),
           _TarjetaTitulo(noticia),
-          _TarjetaImagen(noticia)
+          _TarjetaImagen(noticia),
+          _TarjetaBody(noticia),
+          Divider(),
+          _TarjetaBotones()
         ],
       ),
     );
@@ -48,7 +51,9 @@ class _TarjetaTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(
+        top: 10,
+      ),
       child: Row(
         children: [
           Text(
@@ -68,11 +73,14 @@ class _TarjetaTitulo extends StatelessWidget {
   final Article noticia;
 
   const _TarjetaTitulo(this.noticia);
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Hola Mundo'),
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Text(
+        noticia.title,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }
@@ -85,10 +93,74 @@ class _TarjetaImagen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(vertical: 5),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(50)),
+        child: Container(
+            // padding: EdgeInsets.symmetric(horizontal: 15),
+            child: (noticia.urlToImage != null)
+                ? FadeInImage(
+                    // Esto lo sugirio un alumno dde la clase pero yo tengo otro problema.
+                    imageErrorBuilder: (context, error, stackTrace) {
+                      return Text(
+                        '   Image not load   ',
+                        style:
+                            TextStyle(fontSize: 25, color: miTema.accentColor),
+                      );
+                    },
+                    placeholder: AssetImage('assets/img/giphy.gif'),
+                    image: NetworkImage(noticia.urlToImage),
+                  )
+                : Image(image: AssetImage('asset/img/no-image.png'))),
+      ),
+    );
+  }
+}
+
+class _TarjetaBody extends StatelessWidget {
+  final Article noticia;
+
+  const _TarjetaBody(this.noticia);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: 10,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Text(
-        noticia.title,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        (noticia.description != null) ? noticia.description : '',
+        // style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class _TarjetaBotones extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: miTema.accentColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Icon(Icons.star_border),
+          ),
+          SizedBox(
+            width: 5.0,
+          ),
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: Colors.blue,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Icon(Icons.more),
+          )
+        ],
       ),
     );
   }

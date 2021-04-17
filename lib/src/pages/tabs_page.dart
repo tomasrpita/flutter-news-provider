@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_provider/src/pages/tab1_page.dart';
+import 'package:news_provider/src/pages/tab2_page.dart';
 import 'package:provider/provider.dart';
 
 class TabsPage extends StatelessWidget {
@@ -48,12 +49,7 @@ class _Paginas extends StatelessWidget {
       physics:
           NeverScrollableScrollPhysics(), // evita moverse entre pagina libremente
       // BouncingScrollPhysics(), // hace que el Android tenga el mismo rebote q Ios
-      children: [
-        Tab1Page(),
-        Container(
-          color: Colors.green,
-        ),
-      ],
+      children: [Tab1Page(), Tab2Page()],
     );
   }
 }

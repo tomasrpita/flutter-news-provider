@@ -31,7 +31,7 @@ class _Noticia extends StatelessWidget {
         children: [
           _TarjetaTopBar(this.noticia, this.index),
           _TarjetaTitulo(noticia),
-          _TarjetaImagen(noticia),
+          // _TarjetaImagen(noticia),
           _TarjetaBody(noticia),
           Divider(),
           _TarjetaBotones()

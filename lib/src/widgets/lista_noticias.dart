@@ -31,7 +31,7 @@ class _Noticia extends StatelessWidget {
         children: [
           _TarjetaTopBar(this.noticia, this.index),
           _TarjetaTitulo(noticia),
-          // _TarjetaImagen(noticia),
+          _TarjetaImagen(noticia),
           _TarjetaBody(noticia),
           Divider(),
           _TarjetaBotones()
@@ -87,11 +87,11 @@ class _TarjetaTitulo extends StatelessWidget {
 
 class _TarjetaImagen extends StatelessWidget {
   final Article noticia;
-
   const _TarjetaImagen(this.noticia);
 
   @override
   Widget build(BuildContext context) {
+    print(this.noticia.urlToImage);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       child: ClipRRect(

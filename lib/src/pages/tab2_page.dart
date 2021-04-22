@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:news_provider/src/models/category_model.dart';
 import 'package:news_provider/src/services/news_service.dart';
 import 'package:news_provider/src/theme/tema.dart';
+import 'package:news_provider/src/widgets/lista_noticias.dart';
 import 'package:provider/provider.dart';
 
 class Tab2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final newsService = Provider.of<NewsService>(context);
     return SafeArea(
       child: Scaffold(
           body: Column(
-        children: [Expanded(child: _ListaCategorias())],
+        // children: [Expanded(child: _ListaCategorias())],
+        children: [
+          _ListaCategorias(),
+          Expanded(
+              child:
+                  ListNoticias(newsService.getArticulosCategoriaSeleccionada))
+        ],
       )),
     );
   }
@@ -21,22 +29,26 @@ class _ListaCategorias extends StatelessWidget {
   Widget build(BuildContext context) {
     final categories = Provider.of<NewsService>(context).categories;
 
-    return ListView.builder(
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (BuildContext context, index) {
-          final String cName = categories[index].name;
-          return Padding(
-            padding: EdgeInsets.all(8),
-            child: Column(
-              children: [
-                _CategoryButton(categories[index]),
-                Text('${cName[0].toUpperCase() + cName.substring(1)}  ')
-              ],
-            ),
-          );
-        });
+    return Container(
+      width: double.infinity,
+      height: 75,
+      child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (BuildContext context, index) {
+            final String cName = categories[index].name;
+            return Padding(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  _CategoryButton(categories[index]),
+                  Text('${cName[0].toUpperCase() + cName.substring(1)}  ')
+                ],
+              ),
+            );
+          }),
+    );
   }
 }
 

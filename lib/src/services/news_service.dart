@@ -9,6 +9,7 @@ const _APIL_KEY = '8d52bdc0af2e4e5e9cc13d7879dabee3';
 
 class NewsService with ChangeNotifier {
   List<Article> headlines = [];
+  bool _isLoading = true;
   String _selectedCategory = 'business';
 
   List<Category> categories = [
@@ -34,10 +35,14 @@ class NewsService with ChangeNotifier {
 
   set selectedCategory(String valor) {
     this._selectedCategory = valor;
+    this._isLoading = true;
+
     this.getArticlesByCategory(valor);
 
     notifyListeners();
   }
+
+  bool get isLoading => _isLoading;
 
   List<Article> get getArticulosCategoriaSeleccionada =>
       this.categoryArticles[this.selectedCategory];
@@ -55,6 +60,8 @@ class NewsService with ChangeNotifier {
 
   getArticlesByCategory(String category) async {
     if (this.categoryArticles[category].length > 0) {
+      this._isLoading = false;
+      notifyListeners();
       return this.categoryArticles[category];
     }
 
@@ -66,6 +73,7 @@ class NewsService with ChangeNotifier {
 
     this.categoryArticles[category].addAll(newsResponse.articles);
 
+    this._isLoading = false;
     notifyListeners();
   }
 }

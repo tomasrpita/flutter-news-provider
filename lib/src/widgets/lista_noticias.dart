@@ -100,7 +100,7 @@ class _TarjetaImagen extends StatelessWidget {
             // padding: EdgeInsets.symmetric(horizontal: 15),
             child: (noticia.urlToImage != null)
                 ? FadeInImage(
-                    // Esto lo sugirio un alumno dde la clase pero yo tengo otro problema.
+                    // Resuelve el problema cuando no podia renderizar la imagen
                     imageErrorBuilder: (context, error, stackTrace) {
                       return Text(
                         '   Image not load   ',

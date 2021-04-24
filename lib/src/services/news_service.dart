@@ -5,7 +5,8 @@ import 'package:news_provider/src/models/news_models.dart';
 import 'package:http/http.dart' as http;
 
 const _URL_NEWS = 'https://newsapi.org/v2';
-const _APIL_KEY = '8d52bdc0af2e4e5e9cc13d7879dabee3';
+// Coluca tu Api key, obtenla abriendo una cuenta en: https://newsapi.org
+const _APIL_KEY = '';
 
 class NewsService with ChangeNotifier {
   List<Article> headlines = [];

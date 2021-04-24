@@ -12,3 +12,4 @@ Provider como manejador de estado de aplicación, uso del api https://newsapi.or
 > * Modelos personalizados
 > * Mantener el estado de la aplicación
 
+# flutter-news-provider
